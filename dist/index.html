@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <script src="https://kit.fontawesome.com/b9b250eb6d.js"></script>
+    <title>PodManager</title>
+    <link rel=“stylesheet” href=“https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css“>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+    <header>
+        <div id="title">
+            <span id="home"><i class="Medium material-icons">home</i></span>
+            <h1>POD-MAN</h1>
+        </div>
+        <div class="player"></div>
+        <div class="episodes"></div>
+        
+        <script id="player-template" type="text/x-handlebars-template">
+            <div id="wrapper">
+                <div id='player'>
+                    <audio id="music_player">
+                    <source src="{{audio}}" />
+                    </audio>
+                    <input type="image" src="play-button.png" onclick="play_aud()" id="play_button">
+                    <input type="image" src="music-player-pause-lines.png" onclick="pause_aud()" id="pause_button">
+                    <input type="image" src="video-player-stop-button.png" onclick="stop_aud()" id="stop_button">
+                    <img src="speaker-filled-audio-tool.png" id="vol_img">
+                    <input type="range" id="change_vol" onchange="change_vol()" step="0.05" min="0" max="1" value="1">
+                </div>
+            </div>
+            
+        </script>
+
+
+        <script id="audio-template" type="text/x-handlebars-template">
+            <div id="podcast">
+                <div id="bar"></div>
+                <div id="audio">
+                    <source src="{{audio}}" >
+                    <div id = "progress" class = "text, bar" ></div>
+                    <div id = "playBar">
+                        <span id = "replay" class = "bar"><i class="Medium material-icons">replay_10</i></span>
+                        <span id = "play" class ="bar"><i class="Medium material-icons">play_circle_filled</i></span>
+                        <span id = "forward" class ="bar"><i class="Medium material-icons">forward_10</i></span>
+                        <span id = "currentTime" class = "text, bar">{{currentTime}}00:00 /</span>
+                        <span id = "duration" class = "text, bar">{{duration}}00:00</span>
+                        <span id = "save" class ="bar"><i class="Medium material-icons">star_border</i></span>
+                        <span id = "info" class ="bar"><i class="Medium material-icons">info_outline</i></span>  
+                    </div>            
+            </script>
+
+        <!-- handlebars episodes -->
+
+        <script id="episodes-template" type="text/x-handlebars-template">
+                    <div class="epData" >
+                    {{#each_upto data 1}}
+                    <img class="epImg" src="{{image}}" alt="" style="margin-left: 3.5vh";">
+                    </div>
+                    <div><h2>episodes:</h2></div>
+                {{/each_upto}}
+        
+                {{#each data}}
+                <div class="epData">
+                    <div class="title">
+                    <div class="episode-title" data-id="{{id}}">{{title}}</div>
+                    </div>
+                        
+                    </div>
+                    {{/each}}
+        </script>
+
+        <div class="pods"></div>
+
+        <!-- handlebars  podcasts -->
+
+        <script id="pod-template" type="text/x-handlebars-template">
+                {{#each data}}
+                <div class="podData">
+                    <img class="img" src="{{image}}" data-id="{{id}}" data-title="{{title_original}}">
+                </div>
+                {{/each}}
+            </script>
+
+        <!-- handlebars  genres -->
+
+        <script id="genres-template" type="text/x-handlebars-template">
+                <h2>choose a genre:</h2>
+                {{#each data}}
+                <div class="podData">
+                    <img class="img-genre" src="{{image}}" data-id="{{id}}" data-title="{{title_original}}">
+                </div>
+                {{/each}}
+            </script>
+
+        <!-- handlebars  genres-results -->
+
+        <script id="genres-results-template" type="text/x-handlebars-template">
+                {{#each data}}
+                <div class="podData">
+                    <img class="img-genre-result" src="{{image}}" data-id="{{id}}" data-title="{{title}}">
+                </div>
+                {{/each}}
+            </script>
+
+        </main>
+
+        <footer>
+            <div id="userBar">
+                <input id="podcastInput" type="text" autofocus placeholder=" Find a podcast">
+                <i class="bttn Medium material-icons">search</i>
+            </div>
+        </footer>
+
+
+        <!-- <script src="../server/model/sortedGenres.js"></script> -->
+        <script src="handlebars/dist/handlebars.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="jquery/dist/jquery.js"></script>
+        <script src="podManager.js"></script>
+        <script src="audioPlay.js"></script>
+        <script src="player.js"></script>
+        <script src="sortedGenres.js"></script>
+        <script src="renderer.js"></script>
+        <!-- <script src="logic.js"></script> -->
+        <script src="main.js"></script>
+</body>
+
+</html>
